@@ -1,0 +1,160 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ApiLibros</name>
+    </assembly>
+    <members>
+        <member name="M:ApiLibros.Controllers.AutorsController.GetAutors">
+            <summary>
+            Obtenr los autores
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApiLibros.Controllers.AutorsController.GuetAutor(System.Int32)">
+            <summary>
+            Obtener autor individual
+            </summary>
+            <param name="Id"> Id Autor</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiLibros.Controllers.AutorsController.CrearAutor(ApiLibros.Models.Dto.AutorCreateDto)">
+            <summary>
+            Crear  Autor
+            </summary>
+            <param name="autorCreateDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiLibros.Controllers.AutorsController.Buscar(System.String)">
+            <summary>
+            Bus autor por Nombre
+            </summary>
+            <param name="nombre"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiLibros.Controllers.AutorsController.BorraAutor(System.Int32)">
+            <summary>
+            Borrar Autor
+            </summary>
+            <param name="Id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiLibros.Controllers.CategoriasController.GetCategorias">
+            <summary>
+            Obtener las Categorias
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApiLibros.Controllers.CategoriasController.GuetCategoria(System.Int32)">
+            <summary>
+            Obtener Categoria Individual
+            </summary>
+            <param name="categoriaId"> Id Categoria </param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiLibros.Controllers.CategoriasController.CrearCategoria(ApiLibros.Models.Dto.CategoriaDtoCreate)">
+            <summary>
+            Crear Categoria
+            </summary>
+            <param name="categoriaDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiLibros.Controllers.CategoriasController.ActualizarCategoria(System.Int32,ApiLibros.Models.Dto.CategoriaDto)">
+            <summary>
+            Actualizar Categoria
+            </summary>
+            <param name="categoriaId"></param>
+            <param name="categoriaDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiLibros.Controllers.CategoriasController.BorrarCategoria(System.Int32)">
+            <summary>
+            Borrar Categoria
+            </summary>
+            <param name="categoriaId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiLibros.Controllers.LibrosController.GuetLibros">
+            <summary>
+            Obtener Libros
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApiLibros.Controllers.LibrosController.GuetLibro(System.Int32)">
+            <summary>
+            Obtener un Libro Individual
+            </summary>
+            <param name="Id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiLibros.Controllers.LibrosController.CreateLibros(ApiLibros.Models.Dto.LibroCreateDto)">
+            <summary>
+            Crear Libro
+            </summary>
+            <param name="libroCreateDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiLibros.Controllers.LibrosController.ActualizarLibros(System.Int32,ApiLibros.Models.Dto.LibroUpdateDto)">
+            <summary>
+            Actualizar Libro
+            </summary>
+            <param name="Id"></param>
+            <param name="libroUpdateDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiLibros.Controllers.LibrosController.Buscar(System.String)">
+            <summary>
+            Buscar Libro Por Nombre
+            </summary>
+            <param name="nombre"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiLibros.Controllers.LibrosController.BuscarLibroPorAutor(System.Int32)">
+            <summary>
+            Buscar Libro Por Autor Mediante Id
+            </summary>
+            <param name="Id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiLibros.Controllers.LibrosController.BuscarLibroPorCategoria(System.Int32)">
+            <summary>
+            Buscar libro por categoria mediante Id de categoria
+            </summary>
+            <param name="Id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiLibros.Controllers.LibrosController.BorrarLibros(System.Int32)">
+            <summary>
+            Borrar Libro
+            </summary>
+            <param name="Id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiLibros.Controllers.UsuariosController.GetUsuarios">
+            <summary>
+            Obtener Usuarios
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApiLibros.Controllers.UsuariosController.GuetUsuario(System.Int32)">
+            <summary>
+            Obtener Usuario Individual
+            </summary>
+            <param name="usuarioId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiLibros.Controllers.UsuariosController.Registro(ApiLibros.Models.Dto.UsuaroCreateDto)">
+            <summary>
+            Registro de usuario
+            </summary>
+            <param name="usuaroCreateDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiLibros.Controllers.UsuariosController.Login(ApiLibros.Models.Dto.UsuarioLoginDto)">
+            <summary>
+            Login De usuario
+            </summary>
+            <param name="usuarioLoginDto"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

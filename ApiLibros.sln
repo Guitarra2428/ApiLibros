@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiLibros", "ApiLibros\ApiLibros.csproj", "{9B1D1EE1-AEB5-4BEF-BAEF-46108B6DFFFD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9B1D1EE1-AEB5-4BEF-BAEF-46108B6DFFFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B1D1EE1-AEB5-4BEF-BAEF-46108B6DFFFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B1D1EE1-AEB5-4BEF-BAEF-46108B6DFFFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B1D1EE1-AEB5-4BEF-BAEF-46108B6DFFFD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {814F2375-1FF8-4BD4-983A-0FDB50062E45}
+	EndGlobalSection
+EndGlobal
