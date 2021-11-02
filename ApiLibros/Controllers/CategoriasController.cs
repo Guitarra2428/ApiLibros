@@ -5,10 +5,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ApiLibros.Controllers
 {
@@ -35,11 +32,11 @@ namespace ApiLibros.Controllers
         /// <returns></returns>
         [AllowAnonymous]
         [HttpGet]
-        [ProducesResponseType(200, Type =typeof(List<CategoriaDto>))]
+        [ProducesResponseType(200, Type = typeof(List<CategoriaDto>))]
         [ProducesResponseType(400)]
-        public  IActionResult GetCategorias()
+        public IActionResult GetCategorias()
         {
-           var listadatos= _repository.GetCategorias();
+            var listadatos = _repository.GetCategorias();
 
             var listadoCategoriaDto = new List<CategoriaDto>();
 
@@ -62,9 +59,9 @@ namespace ApiLibros.Controllers
         [ProducesDefaultResponseType]
         public IActionResult GuetCategoria(int categoriaId)
         {
-           var categoria= _repository.GetCategoria(categoriaId);
+            var categoria = _repository.GetCategoria(categoriaId);
 
-            if (categoria==null)
+            if (categoria == null)
             {
                 return NotFound(ModelState);
             }
@@ -86,14 +83,14 @@ namespace ApiLibros.Controllers
         [ProducesDefaultResponseType]
         public IActionResult CrearCategoria([FromBody] CategoriaDtoCreate categoriaDto)
         {
-            if (categoriaDto==null)
+            if (categoriaDto == null)
             {
                 return BadRequest(ModelState);
             }
 
             if (_repository.ExisteCategoria(categoriaDto.Nombre))
             {
-                ModelState.AddModelError( "",$"La CATEGORIA YA EXISTE");
+                ModelState.AddModelError("", $"La CATEGORIA YA EXISTE");
                 return StatusCode(404, ModelState);
             }
 
@@ -103,7 +100,7 @@ namespace ApiLibros.Controllers
             {
                 ModelState.AddModelError(" ", $"Error al agregar nuevo dato {datoCategoria.Nombre}");
                 return StatusCode(500, ModelState);
-            }          
+            }
 
             return CreatedAtRoute("GuetCategoria", new { categoriaId = datoCategoria.CategoriaID }, datoCategoria);
         }
@@ -119,7 +116,7 @@ namespace ApiLibros.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult ActualizarCategoria(int categoriaId, [FromBody] CategoriaDto categoriaDto)
         {
-            if (categoriaDto==null||categoriaId!= categoriaDto.CategoriaID)
+            if (categoriaDto == null || categoriaId != categoriaDto.CategoriaID)
             {
                 return BadRequest(ModelState);
             }
@@ -147,9 +144,9 @@ namespace ApiLibros.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult BorrarCategoria(int categoriaId)
         {
-          var valor= _repository.GetCategoria(categoriaId);
+            var valor = _repository.GetCategoria(categoriaId);
 
-            if (valor== null)
+            if (valor == null)
             {
                 return NotFound();
 

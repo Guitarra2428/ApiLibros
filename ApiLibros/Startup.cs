@@ -55,28 +55,29 @@ namespace ApiLibros
                         ValidateIssuer = false,
                         ValidateAudience = false
                     };
-                } );
+                });
 
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("LibrosUsuario", new OpenApiInfo
-                { Title = "Api Usuario Libros",
-                 Version = " 1",
-                 Description="Backend Libro",
-                 Contact=new OpenApiContact
-                 { 
-                     Email = "Guitarra2428@gmail.com",
-                     Name = "Luis",
-                     Url = new Uri("http://quitckcode-001-site1.etempurl.com/")
-                 },
-                 License=new OpenApiLicense
-                 {
-                     Name="Ing. Luis Mesili",
-                     Url = new Uri("http://quitckcode-001-site1.etempurl.com/")
+                {
+                    Title = "Api Usuario Libros",
+                    Version = " 1",
+                    Description = "Backend Libro",
+                    Contact = new OpenApiContact
+                    {
+                        Email = "Guitarra2428@gmail.com",
+                        Name = "Luis",
+                        Url = new Uri("http://quitckcode-001-site1.etempurl.com/")
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "Ing. Luis Mesili",
+                        Url = new Uri("http://quitckcode-001-site1.etempurl.com/")
 
-                 }
+                    }
 
                 });
                 c.SwaggerDoc("Libros", new OpenApiInfo
@@ -163,12 +164,12 @@ namespace ApiLibros
                                       Type= ReferenceType.SecurityScheme
                                  }
                           }, new List<string>()
-                    }             
+                    }
                 });
-           
+
             });
 
-            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -186,9 +187,9 @@ namespace ApiLibros
                           c.SwaggerEndpoint("/swagger/LibrosCategoria/swagger.json", "Api Categoria Libros ");
                           c.SwaggerEndpoint("/swagger/LibrosAutor/swagger.json", "Api Autor Libros ");
 
-                       }
-                 );               
-               
+                      }
+                 );
+
             }
 
             app.UseHttpsRedirection();

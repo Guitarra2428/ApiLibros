@@ -10,7 +10,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 
 
 namespace ApiLibros.Controllers
@@ -61,14 +60,14 @@ namespace ApiLibros.Controllers
         /// <param name="Id"></param>
         /// <returns></returns>
         [AllowAnonymous]
-        [HttpGet("{Id:int}",Name = "GuetLibro")]
+        [HttpGet("{Id:int}", Name = "GuetLibro")]
         [ProducesResponseType(200, Type = typeof(LibroDto))]
         [ProducesResponseType(404)]
         [ProducesDefaultResponseType]
         public IActionResult GuetLibro(int Id)
         {
             var datos = _repository.GetLibro(Id);
-            if (datos==null)
+            if (datos == null)
             {
                 return BadRequest(ModelState);
             }
@@ -90,7 +89,7 @@ namespace ApiLibros.Controllers
         [ProducesDefaultResponseType]
         public IActionResult CreateLibros([FromForm] LibroCreateDto libroCreateDto)
         {
-            if (libroCreateDto==null)
+            if (libroCreateDto == null)
             {
                 return NotFound();
             }
@@ -140,9 +139,9 @@ namespace ApiLibros.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult ActualizarLibros(int Id , [FromBody] LibroUpdateDto libroUpdateDto)
+        public IActionResult ActualizarLibros(int Id, [FromBody] LibroUpdateDto libroUpdateDto)
         {
-            if (libroUpdateDto==null || Id!=libroUpdateDto.LibtoID)
+            if (libroUpdateDto == null || Id != libroUpdateDto.LibtoID)
             {
                 return BadRequest(ModelState);
             }
@@ -181,7 +180,7 @@ namespace ApiLibros.Controllers
             catch (Exception)
             {
 
-                return StatusCode(StatusCodes.Status500InternalServerError,"Error en la busqueda");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error en la busqueda");
             }
         }
         /// <summary>
@@ -189,27 +188,27 @@ namespace ApiLibros.Controllers
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        [AllowAnonymous]
-        [HttpGet("BuscarLibroPorAutor/{Id:int}")]
-        [ProducesResponseType(200, Type =typeof(List<LibroDto>))]
-        [ProducesResponseType(404)]
-        public IActionResult BuscarLibroPorAutor(int Id)
-        {
-            var datosAutor = _repository.GetLibrosEnAutor(Id);
-            if (datosAutor==null)
-            {
-                return NotFound();
-            }
+        //[AllowAnonymous]
+        //[HttpGet("BuscarLibroPorAutor/{Id:int}")]
+        //[ProducesResponseType(200, Type =typeof(List<LibroDto>))]
+        //[ProducesResponseType(404)]
+        //public IActionResult BuscarLibroPorAutor(int Id)
+        //{
+        //    var datosAutor = _repository.GetLibrosEnAutor(Id);
+        //    if (datosAutor==null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var datosautorDto = new List<LibroDto>();
+        //    var datosautorDto = new List<LibroDto>();
 
-            foreach (var lista in datosAutor)
-            {
-                datosautorDto.Add(_mapper.Map<LibroDto>(lista));
-            }
+        //    foreach (var lista in datosAutor)
+        //    {
+        //        datosautorDto.Add(_mapper.Map<LibroDto>(lista));
+        //    }
 
-            return Ok(datosautorDto);
-        }
+        //    return Ok(datosautorDto);
+        //}
         /// <summary>
         /// Buscar libro por categoria mediante Id de categoria
         /// </summary>
@@ -219,7 +218,7 @@ namespace ApiLibros.Controllers
         [HttpGet("BuscarLibroPorCategoria/{Id:int}")]
         [ProducesResponseType(200, Type = typeof(List<LibroDto>))]
         [ProducesResponseType(404)]
-        public IActionResult BuscarLibroPorCategoria( int Id)
+        public IActionResult BuscarLibroPorCategoria(int Id)
         {
 
             var datosAutor = _repository.GetLibrosEnCategoria(Id);
@@ -251,10 +250,10 @@ namespace ApiLibros.Controllers
         {
             var dato = _repository.GetLibro(Id);
 
-            if (dato==null)
+            if (dato == null)
             {
                 return NotFound();
-            }  
+            }
 
             if (!_repository.BorrarLibro(dato))
             {

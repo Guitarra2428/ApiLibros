@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace ApiLibros.Models.Dto
 {
@@ -10,7 +8,9 @@ namespace ApiLibros.Models.Dto
     {
 
         public int LibtoID { get; set; }
+        [Required(ErrorMessage = "Este campo es obligatorio")]
         public String Titulo { get; set; }
+        [Required(ErrorMessage = "Este campo es obligatorio")]
         public String Descripcion { get; set; }
 
         public DateTime FechaLanzamiento { get; set; }

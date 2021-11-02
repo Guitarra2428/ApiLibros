@@ -4,7 +4,6 @@ using ApiLibros.Repository.Irepsitory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace ApiLibros.Repository
 {
@@ -49,12 +48,12 @@ namespace ApiLibros.Repository
 
         public bool ExisteAutor(int autorID)
         {
-            return _db.Autors.Any(A=>A.AutorId==autorID);
+            return _db.Autors.Any(A => A.AutorId == autorID);
         }
 
         public bool ExisteAutor(string nombre)
         {
-            bool valor= _db.Autors.Any(A => A.Nombre.ToLower().Trim() == nombre.ToLower().Trim());
+            bool valor = _db.Autors.Any(A => A.Nombre.ToLower().Trim() == nombre.ToLower().Trim());
 
             return valor;
 

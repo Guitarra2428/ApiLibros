@@ -1,16 +1,13 @@
 ﻿using ApiLibros.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ApiLibros.Repository.Irepsitory
 {
-  public  interface ILibroRepository
+    public interface ILibroRepository
     {
         ICollection<Libro> GetLibros();
         ICollection<Libro> GetLibrosEnCategoria(int categoriaId);
-        ICollection<Libro> GetLibrosEnAutor(int autorId);
+        //ICollection<Libro> GetLibrosEnAutor(int autorId);
 
         Libro GetLibro(int libroID);
         bool ExisteLibro(string nombre);

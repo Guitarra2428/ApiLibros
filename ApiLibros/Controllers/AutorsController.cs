@@ -10,7 +10,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace ApiLibros.Controllers
 {
@@ -38,7 +37,7 @@ namespace ApiLibros.Controllers
         /// <returns></returns>
         [AllowAnonymous]
         [HttpGet]
-        [ProducesResponseType(200, Type =typeof(List<AutorDto>))]
+        [ProducesResponseType(200, Type = typeof(List<AutorDto>))]
         [ProducesResponseType(400)]
         public IActionResult GetAutors()
         {
@@ -59,18 +58,18 @@ namespace ApiLibros.Controllers
         /// <param name="Id"> Id Autor</param>
         /// <returns></returns>
         [AllowAnonymous]
-        [HttpGet ("{Id:int}",Name = "GuetAutor")]
+        [HttpGet("{Id:int}", Name = "GuetAutor")]
         [ProducesResponseType(200, Type = typeof(AutorDto))]
         [ProducesResponseType(404)]
         [ProducesDefaultResponseType]
         public IActionResult GuetAutor(int Id)
         {
             var datos = _repository.GetAutor(Id);
-            if (datos==null)
+            if (datos == null)
             {
                 return BadRequest(ModelState);
             }
-                    
+
             var datosDto = _mapper.Map<Autor>(datos);
 
             return Ok(datosDto);
@@ -89,11 +88,11 @@ namespace ApiLibros.Controllers
         public IActionResult CrearAutor([FromForm] AutorCreateDto autorCreateDto)
         {
 
-            if (autorCreateDto==null)
+            if (autorCreateDto == null)
             {
                 return NotFound(ModelState);
             }
-            if (_repository.ExisteAutor(autorCreateDto.Nombre+" "+autorCreateDto.Apellido))
+            if (_repository.ExisteAutor(autorCreateDto.Nombre + " " + autorCreateDto.Apellido))
             {
                 ModelState.AddModelError("", $"El el Autor ya exixte{autorCreateDto.Nombre}");
                 return StatusCode(404, ModelState);
@@ -104,13 +103,13 @@ namespace ApiLibros.Controllers
             var rutaPrincipal = _iwebHost.WebRootPath;
             var archivos = HttpContext.Request.Form.Files;
 
-            if (archivo.Length>=0)
+            if (archivo.Length >= 0)
             {
                 var nombreImagen = Guid.NewGuid().ToString();
                 var subida = Path.Combine(rutaPrincipal, @"Imagenes");
                 var extesion = Path.GetExtension(archivos[0].FileName);
 
-                using (var Filestream=new FileStream(Path.Combine(subida, nombreImagen+extesion),FileMode.Create))
+                using (var Filestream = new FileStream(Path.Combine(subida, nombreImagen + extesion), FileMode.Create))
                 {
                     archivos[0].CopyTo(Filestream);
                 }
@@ -126,16 +125,16 @@ namespace ApiLibros.Controllers
                 return StatusCode(500, ModelState);
             }
 
-            return CreatedAtRoute("GuetAutor", new { Id=datosDto.AutorId},datosDto);
+            return CreatedAtRoute("GuetAutor", new { Id = datosDto.AutorId }, datosDto);
         }
 
-        [HttpPatch("{Id}",Name = "ActualizarAutor")]
+        [HttpPatch("{Id}", Name = "ActualizarAutor")]
         [ProducesResponseType(204)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult ActualizarAutor(int Id , [FromBody] AutorUpdateDto autorUpdateDto)
+        public IActionResult ActualizarAutor(int Id, [FromBody] AutorUpdateDto autorUpdateDto)
         {
-            if (autorUpdateDto==null || Id!=autorUpdateDto.AutorId)
+            if (autorUpdateDto == null || Id != autorUpdateDto.AutorId)
             {
                 return NotFound();
             }
@@ -184,13 +183,13 @@ namespace ApiLibros.Controllers
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        [HttpDelete ("{Id:int}", Name = "BorraAutor")]
+        [HttpDelete("{Id:int}", Name = "BorraAutor")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult BorraAutor(int Id)
-        { 
+        {
 
             if (!_repository.ExisteAutor(Id))
             {

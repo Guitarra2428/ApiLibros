@@ -2,10 +2,8 @@
 using ApiLibros.Models;
 using ApiLibros.Repository.Irepsitory;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace ApiLibros.Repository
 {
@@ -14,7 +12,7 @@ namespace ApiLibros.Repository
         private readonly ApplicationDbContext _db;
         public LibroRepository(ApplicationDbContext db)
         {
-           _db=db; 
+            _db = db;
         }
 
         public bool ActualizarLibro(Libro libro)
@@ -29,7 +27,7 @@ namespace ApiLibros.Repository
             return Guardar();
         }
 
-        public IEnumerable<Libro> BuscarLibros( string nombre)
+        public IEnumerable<Libro> BuscarLibros(string nombre)
         {
             IQueryable<Libro> query = _db.Libros;
 
@@ -68,10 +66,10 @@ namespace ApiLibros.Repository
             return _db.Libros.OrderBy(l => l.Titulo).ToList();
         }
 
-        public ICollection<Libro> GetLibrosEnAutor(int autorId)
-        {
-            return _db.Libros.Include(c => c.Autor).Where(a => a.autorID == autorId).ToList();
-        }
+        //public ICollection<Libro> GetLibrosEnAutor(int autorId)
+        //{
+        //    return _db.Libros.Include(c => c.Autor).Where(a => a.autorID == autorId).ToList();
+        //}
 
         public ICollection<Libro> GetLibrosEnCategoria(int categoriaId)
         {

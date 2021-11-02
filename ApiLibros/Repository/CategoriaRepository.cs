@@ -1,10 +1,8 @@
 ﻿using ApiLibros.Data;
 using ApiLibros.Models;
 using ApiLibros.Repository.Irepsitory;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace ApiLibros.Repository
 {
@@ -43,7 +41,7 @@ namespace ApiLibros.Repository
 
         public bool ExisteCategoria(int id)
         {
-            return _db.Categorias.Any(e => e.CategoriaID==id);
+            return _db.Categorias.Any(e => e.CategoriaID == id);
 
         }
 
@@ -55,13 +53,13 @@ namespace ApiLibros.Repository
 
         public ICollection<Categoria> GetCategorias()
         {
-           return _db.Categorias.OrderBy(n => n.Nombre).ToList();
+            return _db.Categorias.OrderBy(n => n.Nombre).ToList();
 
         }
 
         public bool Guardar()
         {
-           return _db.SaveChanges() >= 0 ? true : false;
+            return _db.SaveChanges() >= 0 ? true : false;
         }
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace ApiLibros.Models
+﻿namespace ApiLibros.Models
 {
     public class Usuario
     {

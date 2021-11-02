@@ -1,12 +1,9 @@
 ﻿using ApiLibros.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ApiLibros.Repository.Irepsitory
 {
-  public  interface ICategoriaRepository
+    public interface ICategoriaRepository
     {
         ICollection<Categoria> GetCategorias();
 

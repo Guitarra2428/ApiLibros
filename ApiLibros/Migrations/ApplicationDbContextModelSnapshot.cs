@@ -44,7 +44,12 @@ namespace ApiLibros.Migrations
                     b.Property<string>("UrlImagen")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("libroID")
+                        .HasColumnType("int");
+
                     b.HasKey("AutorId");
+
+                    b.HasIndex("libroID");
 
                     b.ToTable("Autors");
                 });
@@ -86,15 +91,10 @@ namespace ApiLibros.Migrations
                     b.Property<string>("UrlImagen")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("autorID")
-                        .HasColumnType("int");
-
                     b.Property<int>("categoriaID")
                         .HasColumnType("int");
 
                     b.HasKey("LibtoID");
-
-                    b.HasIndex("autorID");
 
                     b.HasIndex("categoriaID");
 
@@ -122,21 +122,24 @@ namespace ApiLibros.Migrations
                     b.ToTable("Usuarios");
                 });
 
-            modelBuilder.Entity("ApiLibros.Models.Libro", b =>
+            modelBuilder.Entity("ApiLibros.Models.Autor", b =>
                 {
-                    b.HasOne("ApiLibros.Models.Autor", "Autor")
+                    b.HasOne("ApiLibros.Models.Libro", "Libro")
                         .WithMany()
-                        .HasForeignKey("autorID")
+                        .HasForeignKey("libroID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Libro");
+                });
+
+            modelBuilder.Entity("ApiLibros.Models.Libro", b =>
+                {
                     b.HasOne("ApiLibros.Models.Categoria", "Categoria")
                         .WithMany()
                         .HasForeignKey("categoriaID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Autor");
 
                     b.Navigation("Categoria");
                 });

@@ -18,8 +18,6 @@ namespace ApiLibros.Models
         [ForeignKey("categoriaID")]
         public Categoria Categoria { get; set; }
 
-        public int autorID { get; set; }
-        [ForeignKey("autorID")]
-        public Autor Autor { get; set; }
+
     }
 }

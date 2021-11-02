@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ApiLibros.Models
 {
+#pragma warning disable CS1591 // Falta el comentario XML para el tipo o miembro visible públicamente
     public class Autor
     {
         [Key]
@@ -15,7 +16,11 @@ namespace ApiLibros.Models
         public DateTime FechaNacimiento { get; set; }
         public String UrlImagen { get; set; }
 
-       
+        public int libroID { get; set; }
+        [ForeignKey("libroID")]
+        public Libro Libro { get; set; }
 
     }
+#pragma warning restore CS1591 // Falta el comentario XML para el tipo o miembro visible públicamente
+
 }

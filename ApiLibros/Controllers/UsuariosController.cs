@@ -1,6 +1,5 @@
 ﻿using ApiLibros.Models;
 using ApiLibros.Models.Dto;
-using ApiLibros.Repository;
 using ApiLibros.Repository.Irepsitory;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -11,10 +10,8 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace ApiLibros.Controllers
 {
@@ -44,9 +41,9 @@ namespace ApiLibros.Controllers
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(List<UsuarioDto>))]
         [ProducesResponseType(400)]
-        public  IActionResult GetUsuarios()
+        public IActionResult GetUsuarios()
         {
-           var listadatos= _repository.GetUsuarios();
+            var listadatos = _repository.GetUsuarios();
 
             var listadoUsuariosDto = new List<UsuarioDto>();
 
@@ -66,9 +63,9 @@ namespace ApiLibros.Controllers
         [ProducesResponseType(404)]
         public IActionResult GuetUsuario(int usuarioId)
         {
-           var usuario= _repository.GetUsuario(usuarioId);
+            var usuario = _repository.GetUsuario(usuarioId);
 
-            if (usuario==null)
+            if (usuario == null)
             {
                 return NotFound(ModelState);
             }
@@ -83,8 +80,8 @@ namespace ApiLibros.Controllers
         /// <param name="usuaroCreateDto"></param>
         /// <returns></returns>
         [AllowAnonymous]
-      [HttpPost ("Registro")]
-      public IActionResult Registro(UsuaroCreateDto usuaroCreateDto)
+        [HttpPost("Registro")]
+        public IActionResult Registro(UsuaroCreateDto usuaroCreateDto)
         {
             usuaroCreateDto.Usuario = usuaroCreateDto.Usuario.ToLower();
 
@@ -142,7 +139,7 @@ namespace ApiLibros.Controllers
             var tokenhadler = new JwtSecurityTokenHandler();
             var Token = tokenhadler.CreateToken(tokenDecripto);
 
-            return Ok(new 
+            return Ok(new
             {
                 Token = tokenhadler.WriteToken(Token)
             });

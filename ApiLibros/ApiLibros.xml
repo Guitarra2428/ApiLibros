@@ -108,13 +108,6 @@
             <param name="nombre"></param>
             <returns></returns>
         </member>
-        <member name="M:ApiLibros.Controllers.LibrosController.BuscarLibroPorAutor(System.Int32)">
-            <summary>
-            Buscar Libro Por Autor Mediante Id
-            </summary>
-            <param name="Id"></param>
-            <returns></returns>
-        </member>
         <member name="M:ApiLibros.Controllers.LibrosController.BuscarLibroPorCategoria(System.Int32)">
             <summary>
             Buscar libro por categoria mediante Id de categoria
