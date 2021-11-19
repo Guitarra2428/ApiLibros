@@ -75,12 +75,14 @@ namespace ApiLibros.Controllers
         /// </summary>
         /// <param name="categoriaDto"></param>
         /// <returns></returns>
+
+       
         [HttpPost]
         [ProducesResponseType(201)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [ProducesDefaultResponseType]
+        // [ProducesDefaultResponseType]
         public IActionResult CrearCategoria([FromBody] CategoriaDtoCreate categoriaDto)
         {
             if (categoriaDto == null)
@@ -110,6 +112,7 @@ namespace ApiLibros.Controllers
         /// <param name="categoriaId"></param>
         /// <param name="categoriaDto"></param>
         /// <returns></returns>
+        
         [HttpPatch("{categoriaId:int}", Name = "ActualizarCategoria")]
         [ProducesResponseType(204)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -137,7 +140,8 @@ namespace ApiLibros.Controllers
         /// </summary>
         /// <param name="categoriaId"></param>
         /// <returns></returns>
-        [HttpDelete]
+        
+        [HttpDelete("{categoriaId:int}", Name = "BorrarCategoria")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]

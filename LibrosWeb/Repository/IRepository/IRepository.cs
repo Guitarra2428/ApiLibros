@@ -7,9 +7,9 @@ namespace LibrosWeb.Repository.IRepository
     {
         Task<IEnumerable> GetTodosAsync(string Url);
         Task<T> GetTAsync(string Url, int Id);
-        Task<bool> CrearAsync(string Url, T crearItem);
-        Task<bool> ActualizarAsync(string Url, T actualizarItem);
-        Task<bool> BorrarAsync(string Url, int Id);
+        Task<bool> CrearAsync(string Url, T crearItem, string token);
+        Task<bool> ActualizarAsync(string Url, T actualizarItem, string token);
+        Task<bool> BorrarAsync(string Url, int Id, string token);
 
 
     }

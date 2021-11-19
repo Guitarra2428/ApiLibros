@@ -9,7 +9,7 @@ namespace LibrosWeb.Models
         public int CategoriaID { get; set; }
 
         [Required(ErrorMessage = "Este campo es obligatorio")]
-        public String Nombre { get; set; }
+        public string Nombre { get; set; }
         public DateTime FechaCreacion { get; set; }
     }
 }

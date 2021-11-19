@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
 namespace ApiLibros.Controllers
@@ -79,13 +78,15 @@ namespace ApiLibros.Controllers
         /// </summary>
         /// <param name="autorCreateDto"></param>
         /// <returns></returns>
+
+        
         [HttpPost]
         [ProducesResponseType(201)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesDefaultResponseType]
-        public IActionResult CrearAutor([FromForm] AutorCreateDto autorCreateDto)
+        public IActionResult CrearAutor([FromBody] AutorDto autorCreateDto)
         {
 
             if (autorCreateDto == null)
@@ -98,24 +99,7 @@ namespace ApiLibros.Controllers
                 return StatusCode(404, ModelState);
             }
 
-            //Subida de foto
-            var archivo = autorCreateDto.Foto;
-            var rutaPrincipal = _iwebHost.WebRootPath;
-            var archivos = HttpContext.Request.Form.Files;
-
-            if (archivo.Length >= 0)
-            {
-                var nombreImagen = Guid.NewGuid().ToString();
-                var subida = Path.Combine(rutaPrincipal, @"Imagenes");
-                var extesion = Path.GetExtension(archivos[0].FileName);
-
-                using (var Filestream = new FileStream(Path.Combine(subida, nombreImagen + extesion), FileMode.Create))
-                {
-                    archivos[0].CopyTo(Filestream);
-                }
-
-                autorCreateDto.UrlImagen = @"\Imagenes\" + nombreImagen + extesion;
-            }
+            
 
             var datosDto = _mapper.Map<Autor>(autorCreateDto);
 
@@ -127,12 +111,12 @@ namespace ApiLibros.Controllers
 
             return CreatedAtRoute("GuetAutor", new { Id = datosDto.AutorId }, datosDto);
         }
-
+      
         [HttpPatch("{Id}", Name = "ActualizarAutor")]
         [ProducesResponseType(204)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult ActualizarAutor(int Id, [FromBody] AutorUpdateDto autorUpdateDto)
+        public IActionResult ActualizarAutor(int Id, [FromBody] AutorDto autorUpdateDto)
         {
             if (autorUpdateDto == null || Id != autorUpdateDto.AutorId)
             {
@@ -182,7 +166,7 @@ namespace ApiLibros.Controllers
         /// Borrar Autor
         /// </summary>
         /// <param name="Id"></param>
-        /// <returns></returns>
+        /// <returns></returns>       
         [HttpDelete("{Id:int}", Name = "BorraAutor")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

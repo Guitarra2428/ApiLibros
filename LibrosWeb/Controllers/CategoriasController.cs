@@ -1,6 +1,7 @@
 ﻿using LibrosWeb.Models;
 using LibrosWeb.Repository.IRepository;
 using LibrosWeb.Utilidades;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -20,28 +21,29 @@ namespace LibrosWeb.Controllers
             return View(new Categoria() { });
         }
 
+
         [HttpGet]
-        public IActionResult GetTodasCategorias()
+        public async Task<IActionResult> GetTodasCategorias()
         {
-            return Json(new { data = _repository.GetTodosAsync(CT.UrApiCategoria) });
+            return Json(new { data = await _repository.GetTodosAsync(CT.UrApiCategoria) });
         }
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
 
         }
         [HttpPost]
-        public async Task< IActionResult> Create(Categoria categoria)
+        public async Task<IActionResult> Create(Categoria categoria)
         {
             if (ModelState.IsValid)
             {
-                await _repository.CrearAsync(CT.UrApiCategoria, categoria);
+                await _repository.CrearAsync(CT.UrApiCategoria, categoria, HttpContext.Session.GetString("JWToken"));
                 return RedirectToAction(nameof(Index));
             }
 
-             return View( );
+            return View();
 
         }
 
@@ -49,13 +51,13 @@ namespace LibrosWeb.Controllers
         public async Task<IActionResult> Edit(int? id)
         {
             Categoria categoriaItem = new Categoria();
-            if (id==null)
+            if (id == null)
             {
                 return NotFound();
             }
 
             categoriaItem = await _repository.GetTAsync(CT.UrApiCategoria, id.GetValueOrDefault());
-            if (categoriaItem==null)
+            if (categoriaItem == null)
             {
                 return NotFound();
             }
@@ -66,11 +68,11 @@ namespace LibrosWeb.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Udate(Categoria categoria)
+        public async Task<IActionResult> Update(Categoria categoria)
         {
             if (ModelState.IsValid)
             {
-                await _repository.ActualizarAsync(CT.UrApiCategoria + categoria.CategoriaID, categoria);
+                await _repository.ActualizarAsync(CT.UrApiCategoria + categoria.CategoriaID, categoria,  HttpContext.Session.GetString("JWToken"));
                 return RedirectToAction(nameof(Index));
             }
 
@@ -80,12 +82,12 @@ namespace LibrosWeb.Controllers
 
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)
-        {            
-            var categoriaItem = await  _repository.BorrarAsync(CT.UrApiCategoria , id);
+        {
+            var categoriaItem = await _repository.BorrarAsync(CT.UrApiCategoria, id, HttpContext.Session.GetString("JWToken"));
 
             if (categoriaItem)
             {
-                return Json(new {success=true, message="El Registro Se Borado Correctamente" });
+                return Json(new { success = true, message = "El Registro Se Borado Correctamente" });
             }
 
             return Json(new { success = true, message = "El Registro Se Borado Correctamente" });

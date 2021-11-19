@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewData["Title"] = "Lista de Libro";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class=" container">
+    <div class="row">
+        <div class="col-6">
+
+            <h2>Lista de Libro</h2>
+        </div>
+        <div class="col-6">
+            <a class="btn btn-success" asp-action="Create"> Crear Nuevo Libro</a>
+        </div>
+
+    </div>
+
+    <br />
+    <br />
+
+    <div class="p-2">
+
+        <table class="table table-bordered table-striped" id="tbLibros">
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>Titulo</td>
+                    <td>Descripcion</td>                    
+                    <td>FechLaNazamiento</td>
+                    <td>Categoria</td>
+                    <td>Options</td>
+
+                </tr>
+            </thead>
+        </table>
+
+    </div>
+
+</div>
+@section Scripts{
+    <script src="~/js/Libros.js"></script>
+
+}

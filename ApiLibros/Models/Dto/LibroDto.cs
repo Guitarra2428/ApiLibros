@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace ApiLibros.Models.Dto
@@ -7,16 +6,18 @@ namespace ApiLibros.Models.Dto
     public class LibroDto
     {
 
-        public int LibtoID { get; set; }
+        public int LibroID { get; set; }
+
         [Required(ErrorMessage = "Este campo es obligatorio")]
-        public String Titulo { get; set; }
+        public string Titulo { get; set; }
         [Required(ErrorMessage = "Este campo es obligatorio")]
-        public String Descripcion { get; set; }
+        public string Descripcion { get; set; }
 
         public DateTime FechaLanzamiento { get; set; }
-        public String UrlImagen { get; set; }
-        public IFormFile Foto { get; set; }
-
+        public byte[] UrlImagen { get; set; }
+        public int categoriaID { get; set; }
+        public Categoria Categoria { get; set; }
+        // [ForeignKey("categoriaID")]
 
     }
 }

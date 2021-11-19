@@ -10,7 +10,7 @@ namespace LibrosWeb.Models
         public string Sexo { get; set; }
         public int Edad { get; set; }
         public DateTime FechaNacimiento { get; set; }
-        public String UrlImagen { get; set; }
+        public byte[] UrlImagen { get; set; }
 
         public int libroID { get; set; }
         public Libro Libro { get; set; }

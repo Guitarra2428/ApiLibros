@@ -1,10 +1,13 @@
 using LibrosWeb.Repository;
 using LibrosWeb.Repository.IRepository;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace LibrosWeb
 {
@@ -20,6 +23,18 @@ namespace LibrosWeb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Autenticacion
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.Cookie.HttpOnly = true;
+                    options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+                    options.LoginPath = "/Home/Login";
+                    options.AccessDeniedPath = "/Home/AccesoDaniel";
+                    options.SlidingExpiration = true;
+                });
+
+
             services.AddHttpClient();
             services.AddControllersWithViews();
 
@@ -27,6 +42,16 @@ namespace LibrosWeb
             services.AddScoped<ILibroRepository, LibroRepository>();
             services.AddScoped<IAutorRepository, AutorRepository>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<IAcounRepository, AcountRepository>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            services.AddSession(option =>
+            {
+                option.IdleTimeout = TimeSpan.FromMinutes(10);
+                option.Cookie.HttpOnly = true;
+                option.Cookie.IsEssential = true;
+
+            });
 
         }
 
@@ -49,7 +74,8 @@ namespace LibrosWeb
             app.UseCors(X => X.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseRouting();
-
+            app.UseSession();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

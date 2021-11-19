@@ -38,6 +38,7 @@ namespace ApiLibros.Controllers
         /// Obtener Usuarios
         /// </summary>
         /// <returns></returns>
+        [AllowAnonymous]
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(List<UsuarioDto>))]
         [ProducesResponseType(400)]
@@ -58,8 +59,9 @@ namespace ApiLibros.Controllers
         /// </summary>
         /// <param name="usuarioId"></param>
         /// <returns></returns>
+        [AllowAnonymous]
         [HttpGet("{usuarioId:int}", Name = "GuetUsuario")]
-        [ProducesResponseType(200, Type = typeof(AutorDto))]
+        [ProducesResponseType(200, Type = typeof(UsuarioDto))]
         [ProducesResponseType(404)]
         public IActionResult GuetUsuario(int usuarioId)
         {

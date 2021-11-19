@@ -52,12 +52,12 @@ namespace ApiLibros.Repository
 
         public bool ExisteLibro(int id)
         {
-            return _db.Libros.Any(e => e.LibtoID == id);
+            return _db.Libros.Any(e => e.LibroID == id);
         }
 
         public Libro GetLibro(int libroID)
         {
-            return _db.Libros.FirstOrDefault(e => e.LibtoID == libroID);
+            return _db.Libros.FirstOrDefault(e => e.LibroID == libroID);
 
         }
 

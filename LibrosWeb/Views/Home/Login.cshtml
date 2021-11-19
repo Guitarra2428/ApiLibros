@@ -1,0 +1,40 @@
+﻿@model LibrosWeb.Models.UsuarioM
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-sm-6 offset-3 p-3">
+
+            <h1 class="text-center"> Acceso De Usuario </h1>
+
+            <form asp-action="Login" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <div class="col-12">
+                        <input type="text" asp-for="Usuario" class="form-control" placeholder="Digite el usuario" />
+                        <span asp-validation-for="Usuario"></span>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <div class="col-12">
+                        <input type="password" asp-for="Password" class="form-control" placeholder="Digite la contraseña" />
+                        <span asp-validation-for="Usuario"></span>
+                    </div>
+
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Ingresar</button>
+            </form>
+        </div>
+
+    </div>
+
+</div>

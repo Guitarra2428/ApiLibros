@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace ApiLibros.Models.Dto
@@ -14,8 +13,8 @@ namespace ApiLibros.Models.Dto
         public string Sexo { get; set; }
         public int Edad { get; set; }
         public DateTime FechaNacimiento { get; set; }
-        public String UrlImagen { get; set; }
-        public IFormFile Foto { get; set; }
+        public byte[] UrlImagen { get; set; }
+        //public IFormFile Foto { get; set; }
         public int libroID { get; set; }
 
 

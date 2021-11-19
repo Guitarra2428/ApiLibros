@@ -1,13 +1,13 @@
 ﻿@model LibrosWeb.Models.Categoria
 @{
-    ViewData["Title"] = "Crear categoria";
+    ViewData["Title"] = "Editar categoria";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <h2 class=" text-primary"> Crear Una Categoria</h2>
+            <h2 class=" text-primary"> Editar  Categoria</h2>
         </div>
 
     </div>
@@ -16,7 +16,9 @@
     <br />
     <div class="row">
         <div class="col-sm-12">
-            <form method="post" asp-action="Create">
+            <form method="post" asp-action="Update">
+
+                <input type="hidden" asp-for="CategoriaID" />
                 <div asp-validation-summary="ModelOnly" class="text-danger"> </div>
 
                 <div class="form-group row">

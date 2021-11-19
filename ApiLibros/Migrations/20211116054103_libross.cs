@@ -3,28 +3,10 @@ using System;
 
 namespace ApiLibros.Migrations
 {
-    public partial class usuario : Migration
+    public partial class libross : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Autors",
-                columns: table => new
-                {
-                    AutorId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Apellido = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Sexo = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Edad = table.Column<int>(type: "int", nullable: false),
-                    FechaNacimiento = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UrlImagen = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Autors", x => x.AutorId);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Categorias",
                 columns: table => new
@@ -58,24 +40,17 @@ namespace ApiLibros.Migrations
                 name: "Libros",
                 columns: table => new
                 {
-                    LibtoID = table.Column<int>(type: "int", nullable: false)
+                    LibroID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Titulo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FechaLanzamiento = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UrlImagen = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    categoriaID = table.Column<int>(type: "int", nullable: false),
-                    autorID = table.Column<int>(type: "int", nullable: false)
+                    UrlImagen = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    categoriaID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Libros", x => x.LibtoID);
-                    table.ForeignKey(
-                        name: "FK_Libros_Autors_autorID",
-                        column: x => x.autorID,
-                        principalTable: "Autors",
-                        principalColumn: "AutorId",
-                        onDelete: ReferentialAction.Cascade);
+                    table.PrimaryKey("PK_Libros", x => x.LibroID);
                     table.ForeignKey(
                         name: "FK_Libros_Categorias_categoriaID",
                         column: x => x.categoriaID,
@@ -84,10 +59,35 @@ namespace ApiLibros.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Autors",
+                columns: table => new
+                {
+                    AutorId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Apellido = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Sexo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Edad = table.Column<int>(type: "int", nullable: false),
+                    FechaNacimiento = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UrlImagen = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    libroID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Autors", x => x.AutorId);
+                    table.ForeignKey(
+                        name: "FK_Autors_Libros_libroID",
+                        column: x => x.libroID,
+                        principalTable: "Libros",
+                        principalColumn: "LibroID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
-                name: "IX_Libros_autorID",
-                table: "Libros",
-                column: "autorID");
+                name: "IX_Autors_libroID",
+                table: "Autors",
+                column: "libroID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Libros_categoriaID",
@@ -98,13 +98,13 @@ namespace ApiLibros.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Libros");
+                name: "Autors");
 
             migrationBuilder.DropTable(
                 name: "Usuarios");
 
             migrationBuilder.DropTable(
-                name: "Autors");
+                name: "Libros");
 
             migrationBuilder.DropTable(
                 name: "Categorias");

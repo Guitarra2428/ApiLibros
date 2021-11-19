@@ -6,25 +6,28 @@ $(document).ready(function () {
 });
 
 function loadDataTable() {
-    dataTable = $("#tblCategorias").DataTable({
+    dataTable = $("#tbLibros").DataTable({
         "ajax": {
-            "url": "/Categorias/GetTodasCategorias",
+            "url": "/Libros/GetTodasLibros",
             "type": "GET",
             "datatype": "json"
         },
         "columns":[
+            { "data": "libroID", "width": "20%" },
+            { "data": "titulo", "width": "20%" },
+            { "data": "descripcion", "width": "20%" },
+            { "data": "fechaLanzamiento", "width": "20%" },
             { "data": "categoriaID", "width": "20%" },
-            { "data": "nombre", "width": "40%" },
-            { "data": "fechaCreacion", "width": "20%" },
+         
 
             {
-                "data": "categoriaID",
+                "data": "libroID",
                 "render": function (data) {
                     return `
                          <div class="text-center">
-                              <a href="/Categorias/Edit/${data}" class="btn btn-success text-white" style="cursor:pointer">Editar</a>
+                              <a href="/Libros/Edit/${data}" class="btn btn-success text-white" style="cursor:pointer">Editar</a>
                                      &nbsp;
-                             <a onclick = Delete("/Categorias/Delete/${data}") class="btn btn-danger text-white" style="cursor:pointer">Borrar</a>
+                             <a onclick = Delete("/Libros/Delete/${data}") class="btn btn-danger text-white" style="cursor:pointer">Borrar</a>
 
                         </div>
 

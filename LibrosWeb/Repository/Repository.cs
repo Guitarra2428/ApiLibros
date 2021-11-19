@@ -17,7 +17,7 @@ namespace LibrosWeb.Repository
             _clientFactory = clientFactory;
         }
 
-        public async Task<bool> ActualizarAsync(string Url, T actualizarItem)
+        public async Task<bool> ActualizarAsync(string Url, T actualizarItem, string token)
         {
             var peticion = new HttpRequestMessage(HttpMethod.Patch, Url);
             if (actualizarItem != null)
@@ -32,6 +32,13 @@ namespace LibrosWeb.Repository
             }
 
             var cliente = _clientFactory.CreateClient();
+
+            if (token!=null && token.Length>0)
+            {
+                
+                cliente.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+            }
+
             HttpResponseMessage respuesta = await cliente.SendAsync(peticion);
             if (respuesta.StatusCode == System.Net.HttpStatusCode.NoContent)
             {
@@ -44,12 +51,18 @@ namespace LibrosWeb.Repository
 
         }
 
-        public async Task<bool> BorrarAsync(string Url, int Id)
+        public async Task<bool> BorrarAsync(string Url, int Id, string token)
         {
             var peticion = new HttpRequestMessage(HttpMethod.Delete, Url + Id);
 
 
             var cliente = _clientFactory.CreateClient();
+
+            if (token != null && token.Length > 0)
+            {
+
+                cliente.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+            }
             HttpResponseMessage respuesta = await cliente.SendAsync(peticion);
 
             if (respuesta.StatusCode == System.Net.HttpStatusCode.NoContent)
@@ -62,7 +75,7 @@ namespace LibrosWeb.Repository
             }
         }
 
-        public async Task<bool> CrearAsync(string Url, T crearItem)
+        public async Task<bool> CrearAsync(string Url, T crearItem, string token)
         {
             var peticion = new HttpRequestMessage(HttpMethod.Post, Url);
             if (crearItem != null)
@@ -77,6 +90,12 @@ namespace LibrosWeb.Repository
             }
 
             var cliente = _clientFactory.CreateClient();
+
+            if (token != null && token.Length > 0)
+            {
+
+                cliente.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+            }
             HttpResponseMessage respuesta = await cliente.SendAsync(peticion);
             if (respuesta.StatusCode == System.Net.HttpStatusCode.Created)
             {

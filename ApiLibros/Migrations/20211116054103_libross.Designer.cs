@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiLibros.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211031031354_todos")]
-    partial class todos
+    [Migration("20211116054103_libross")]
+    partial class libross
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -43,8 +43,8 @@ namespace ApiLibros.Migrations
                     b.Property<string>("Sexo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UrlImagen")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("UrlImagen")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<int>("libroID")
                         .HasColumnType("int");
@@ -76,7 +76,7 @@ namespace ApiLibros.Migrations
 
             modelBuilder.Entity("ApiLibros.Models.Libro", b =>
                 {
-                    b.Property<int>("LibtoID")
+                    b.Property<int>("LibroID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -90,13 +90,13 @@ namespace ApiLibros.Migrations
                     b.Property<string>("Titulo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UrlImagen")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("UrlImagen")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<int>("categoriaID")
                         .HasColumnType("int");
 
-                    b.HasKey("LibtoID");
+                    b.HasKey("LibroID");
 
                     b.HasIndex("categoriaID");
 

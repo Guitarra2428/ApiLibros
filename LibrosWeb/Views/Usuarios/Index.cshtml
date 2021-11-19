@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "Lista de categoria";
+    ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -8,11 +8,11 @@
     <div class="row">
         <div class="col-6">
 
-            <h2>Lista de categoria</h2>
+            <h2>Lista De Usuarios</h2>
         </div>
-        <div class="col-6">
+        @*<div class="col-6">
             <a class="btn btn-success" asp-action="Create"> Crear Neva Categoria</a>
-        </div>
+        </div>*@
 
     </div>
 
@@ -21,12 +21,12 @@
 
     <div class="p-2">
 
-        <table class="table table-bordered table-striped" id="tblCategorias">
+        <table class="table table-bordered table-striped" id="tblUsuarios">
             <thead>
                 <tr>
                     <td>Id</td>
-                    <td>Nombre</td>
-                    <td>FechaCreacion</td>
+                    <td>Usuario</td>
+                    <td>Password</td>
                     <td>Options</td>
 
                 </tr>
@@ -36,7 +36,7 @@
     </div>
 
 </div>
-@section Scripts{ 
-    <script src="~/js/Categorias.js"></script>
+@section Scripts{
+    <script src="~/js/Usuarios.js"></script>
 
 }

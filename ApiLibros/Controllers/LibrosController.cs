@@ -8,14 +8,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
 
 namespace ApiLibros.Controllers
 {
     [Authorize]
-    [Route("api/[controller]")]
+    [Route("api/Libros")]
     [ApiController]
     [ApiExplorerSettings(GroupName = "Libros")]
 
@@ -81,13 +80,13 @@ namespace ApiLibros.Controllers
         /// </summary>
         /// <param name="libroCreateDto"></param>
         /// <returns></returns>
+       
         [HttpPost]
         [ProducesResponseType(201)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [ProducesDefaultResponseType]
-        public IActionResult CreateLibros([FromForm] LibroCreateDto libroCreateDto)
+        public IActionResult CreateLibros([FromBody] LibroCreateDto libroCreateDto)
         {
             if (libroCreateDto == null)
             {
@@ -99,24 +98,6 @@ namespace ApiLibros.Controllers
                 return StatusCode(404, ModelState);
             }
 
-            //Subida de foto
-            var archivo = libroCreateDto.Foto;
-            var rutaPrincipal = _iwebHost.WebRootPath;
-            var archivos = HttpContext.Request.Form.Files;
-
-            if (archivo.Length >= 0)
-            {
-                var nombreImagen = Guid.NewGuid().ToString();
-                var subida = Path.Combine(rutaPrincipal, @"Imagenes");
-                var extesion = Path.GetExtension(archivos[0].FileName);
-
-                using (var Filestream = new FileStream(Path.Combine(subida, nombreImagen + extesion), FileMode.Create))
-                {
-                    archivos[0].CopyTo(Filestream);
-                }
-
-                libroCreateDto.UrlImagen = @"\Imagenes\" + nombreImagen + extesion;
-            }
 
 
             var datosDto = _mapper.Map<Libro>(libroCreateDto);
@@ -126,7 +107,7 @@ namespace ApiLibros.Controllers
                 ModelState.AddModelError("", $"Este libro ya esta agregado {datosDto.Titulo}");
                 return StatusCode(404, ModelState);
             }
-            return CreatedAtRoute("GuetLibro", new { Id = datosDto.LibtoID }, datosDto);
+            return CreatedAtRoute("GuetLibro", new { Id = datosDto.LibroID }, datosDto);
 
         }
         /// <summary>
@@ -135,13 +116,14 @@ namespace ApiLibros.Controllers
         /// <param name="Id"></param>
         /// <param name="libroUpdateDto"></param>
         /// <returns></returns>
+       
         [HttpPatch("{Id:int}", Name = "ActualizarLibros")]
         [ProducesResponseType(204)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult ActualizarLibros(int Id, [FromBody] LibroUpdateDto libroUpdateDto)
+        public IActionResult ActualizarLibros(int Id, [FromBody] LibroDto libroUpdateDto)
         {
-            if (libroUpdateDto == null || Id != libroUpdateDto.LibtoID)
+            if (libroUpdateDto == null || Id != libroUpdateDto.LibroID)
             {
                 return BadRequest(ModelState);
             }
@@ -183,32 +165,7 @@ namespace ApiLibros.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error en la busqueda");
             }
         }
-        /// <summary>
-        /// Buscar Libro Por Autor Mediante Id
-        /// </summary>
-        /// <param name="Id"></param>
-        /// <returns></returns>
-        //[AllowAnonymous]
-        //[HttpGet("BuscarLibroPorAutor/{Id:int}")]
-        //[ProducesResponseType(200, Type =typeof(List<LibroDto>))]
-        //[ProducesResponseType(404)]
-        //public IActionResult BuscarLibroPorAutor(int Id)
-        //{
-        //    var datosAutor = _repository.GetLibrosEnAutor(Id);
-        //    if (datosAutor==null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var datosautorDto = new List<LibroDto>();
-
-        //    foreach (var lista in datosAutor)
-        //    {
-        //        datosautorDto.Add(_mapper.Map<LibroDto>(lista));
-        //    }
-
-        //    return Ok(datosautorDto);
-        //}
+       
         /// <summary>
         /// Buscar libro por categoria mediante Id de categoria
         /// </summary>
@@ -241,6 +198,7 @@ namespace ApiLibros.Controllers
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
+       
         [HttpDelete("{Id:int}", Name = "GuetLibro")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

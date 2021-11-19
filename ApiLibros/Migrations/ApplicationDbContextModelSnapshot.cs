@@ -41,8 +41,8 @@ namespace ApiLibros.Migrations
                     b.Property<string>("Sexo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UrlImagen")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("UrlImagen")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<int>("libroID")
                         .HasColumnType("int");
@@ -74,7 +74,7 @@ namespace ApiLibros.Migrations
 
             modelBuilder.Entity("ApiLibros.Models.Libro", b =>
                 {
-                    b.Property<int>("LibtoID")
+                    b.Property<int>("LibroID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -88,13 +88,13 @@ namespace ApiLibros.Migrations
                     b.Property<string>("Titulo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UrlImagen")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("UrlImagen")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<int>("categoriaID")
                         .HasColumnType("int");
 
-                    b.HasKey("LibtoID");
+                    b.HasKey("LibroID");
 
                     b.HasIndex("categoriaID");
 

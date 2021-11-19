@@ -17,7 +17,7 @@
             <param name="Id"> Id Autor</param>
             <returns></returns>
         </member>
-        <member name="M:ApiLibros.Controllers.AutorsController.CrearAutor(ApiLibros.Models.Dto.AutorCreateDto)">
+        <member name="M:ApiLibros.Controllers.AutorsController.CrearAutor(ApiLibros.Models.Dto.AutorDto)">
             <summary>
             Crear  Autor
             </summary>
@@ -36,7 +36,7 @@
             Borrar Autor
             </summary>
             <param name="Id"></param>
-            <returns></returns>
+            <returns></returns>       
         </member>
         <member name="M:ApiLibros.Controllers.CategoriasController.GetCategorias">
             <summary>
@@ -93,7 +93,7 @@
             <param name="libroCreateDto"></param>
             <returns></returns>
         </member>
-        <member name="M:ApiLibros.Controllers.LibrosController.ActualizarLibros(System.Int32,ApiLibros.Models.Dto.LibroUpdateDto)">
+        <member name="M:ApiLibros.Controllers.LibrosController.ActualizarLibros(System.Int32,ApiLibros.Models.Dto.LibroDto)">
             <summary>
             Actualizar Libro
             </summary>
